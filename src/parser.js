@@ -14,4 +14,4 @@ const Parser = {
     }
 };
 
-window.Parser = Parser;
+export default Parser;
