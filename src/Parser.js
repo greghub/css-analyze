@@ -1,7 +1,19 @@
-const Parser = {
-    css: '',
-    parseCSS: () => {
-        const exp = new RegExp(/{[^}]*}/, 'gs');
+class Parser {
+    constructor() {
+        this.css = '';
+    }
+
+    setCSS(css) {
+        this.css = css;
+        return this;
+    }
+
+    getCSS() {
+        return this.css;
+    }
+
+    parseCSS() {
+        const exp = new RegExp(/{[^}]*}/, 'g'); // gs
         const results = this.css.match(exp);
         const properties = [];
 
@@ -12,6 +24,6 @@ const Parser = {
 
         return properties;
     }
-};
+}
 
 export default Parser;
