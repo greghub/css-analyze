@@ -1,4 +1,4 @@
-let Parser = {
+const Parser = {
     css: '',
 
     setCSS: function setCSS(css) {
@@ -10,7 +10,7 @@ let Parser = {
         return this.css;
     },
 
-    parseCSS: function parseCSS () {
+    parseCSS: function parseCSS() {
         const exp = new RegExp(/{[^}]*}/, 'g'); // gs
         const results = this.css.match(exp);
         const properties = [];
