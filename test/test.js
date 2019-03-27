@@ -32,4 +32,8 @@ describe('Parsing CSS', () => {
             ]
         ]);
     });
+
+    it('can get unknown properties', () => {
+        assert.deepEqual(Parser.getUnknownProperties(), ['unknown-property']);
+    });
 });

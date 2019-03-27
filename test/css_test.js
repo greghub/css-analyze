@@ -15,5 +15,6 @@ export default `
   border-radius: 72px;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.07);
   cursor: pointer;
+  unknown-property: "some value";
 }
 `;
