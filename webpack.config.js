@@ -8,6 +8,9 @@ module.exports = {
         library: 'CssAnalyzer',
         libraryTarget: 'umd'
     },
+    devServer: {
+        contentBase: './dist'
+    },
     module: {
         rules: [
             {
