@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --require @babel/register",
+    "test": "nyc mocha --require @babel/register --require babel-polyfill",
     "start": "webpack-dev-server --open",
     "build": "webpack --mode=production",
     "watch": "webpack --watch --mode=development"
@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.4.2",
     "@babel/register": "^7.4.0",
     "babel-loader": "^8.0.5",
+    "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -35,5 +36,8 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
   }
 }
