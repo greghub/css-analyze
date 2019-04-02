@@ -1,4 +1,4 @@
-import cssPropertyList from './cssPropertyList';
+import cssPropertyList from './data/cssPropertyList';
 
 const Parser = {
     css: '',
