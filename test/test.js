@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import Parser from '../src/Parser';
 import ExternalCssGetter from '../src/ExternalCssGetter';
+import Analyzer from '../src/Analyzer';
 import css_test from './css_test'
 
 const assert = require('assert');
@@ -104,5 +105,20 @@ describe('Can get external CSS', () => {
                 'https://gist.githubusercontent.com/greghub/e30d96ff0132dd1daedbf7ed45329877/raw/7bf224c6681de162e9e66591c8f3b6b4ec802ca7/css_analyzer_test_2'
             ])
         );
+    });
+});
+
+describe('Analyze CSS', () => {
+    it('can find property in the properties list: background', () => {
+        assert.equal(true, Analyzer.findProp('background'));
+    });
+    it('can\'t find property in the properties list: --bg-color', () => {
+        assert.notEqual(true, Analyzer.findProp('--bg-color'));
+    });
+    it('can find value in the values list: scale', () => {
+        assert.equal(true, Analyzer.findVal('scale(1.2)'));
+    });
+    it('can\'t find value in the values list: #ffffff', () => {
+        assert.notEqual(true, Analyzer.findVal('#ffffff'));
     });
 });
