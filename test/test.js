@@ -110,15 +110,51 @@ describe('Can get external CSS', () => {
 
 describe('Analyze CSS', () => {
     it('can find property in the properties list: background', () => {
-        assert.equal(true, Analyzer.findProp('background'));
+        assert.notEqual(false, Analyzer.findProp('background'));
     });
     it('can\'t find property in the properties list: --bg-color', () => {
-        assert.notEqual(true, Analyzer.findProp('--bg-color'));
+        assert.equal(false, Analyzer.findProp('--bg-color'));
     });
     it('can find value in the values list: scale', () => {
-        assert.equal(true, Analyzer.findVal('scale(1.2)'));
+        assert.notEqual(false, Analyzer.findVal('scale(1.2)'));
     });
-    it('can\'t find value in the values list: #ffffff', () => {
-        assert.notEqual(true, Analyzer.findVal('#ffffff'));
+    it('can\'t find value in the values list: #fa55cd', () => {
+        assert.equal(true, Analyzer.skipStaticValues('#fa55cd'));
+    });
+    it('can\'t find value in the values list: #fff', () => {
+        assert.equal(true, Analyzer.skipStaticValues('#fff'));
+    });
+    it('can\'t find value in the values list: red', () => {
+        assert.equal(true, Analyzer.skipStaticValues('red'));
+    });
+    it('can\'t find value in the values list: 12px 0px 0 8px', () => {
+        assert.equal(true, Analyzer.skipStaticValues('12px 0px 0 8px'));
+    });
+    it('can\'t find value in the values list: 4px 2px 3px 5px rgba(0, 0, 0, 0.5)', () => {
+        assert.equal(true, Analyzer.skipStaticValues('4px 2px 3px 5px rgba(0, 0, 0, 0.5)'));
+    });
+    it('can\'t find value in the values list: rgba(255, 255, 255, 0.7)', () => {
+        assert.equal(true, Analyzer.skipStaticValues('rgba(255, 255, 255, 0.7)'));
+    });
+    it('can\'t find value in the values list: 45deg', () => {
+        assert.equal(false, Analyzer.skipStaticValues('45deg')); // false
+    });
+    it('can\'t find value in the values list: 1.5', () => {
+        assert.equal(true, Analyzer.skipStaticValues('1.5'));
+    });
+    it('can\'t find value in the values list: 2rem', () => {
+        assert.equal(false, Analyzer.skipStaticValues('2rem')); // false
+    });
+    it('can\'t find value in the values list: 100%', () => {
+        assert.equal(true, Analyzer.skipStaticValues('100%'));
+    });
+    it('can\'t find value in the values list: url(\'https://adonisjs.com/docs/4.1/installation.jpg\')', () => {
+        assert.equal(true, Analyzer.skipStaticValues('url(\'https://adonisjs.com/docs/4.1/installation.jpg\')'));
+    });
+    it('can\'t find value in the values list: url("https://adonisjs.com/docs/4.1/installation.jpg")', () => {
+        assert.equal(true, Analyzer.skipStaticValues('url("https://adonisjs.com/docs/4.1/installation.jpg")'));
+    });
+    it('can\'t find value in the values list: "content"', () => {
+        assert.equal(true, Analyzer.skipStaticValues('"content"'));
     });
 });
