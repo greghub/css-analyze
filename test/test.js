@@ -15,21 +15,60 @@ describe('Parsing CSS', () => {
         Parser.setCSS(css_test);
         assert.deepEqual(Parser.parseCSS(), [
             [
-                'background-image',
-                'display',
-                'width',
-                'height',
-                'justify-content',
-                'align-items'
+                {
+                    'p': 'background-image',
+                    'v': 'linear-gradient(-128deg, rgba(255, 181, 32, 0.93) 3%, rgba(239, 39, 153, 0.93) 88%, rgba(237, 18, 171, 0.93) 100%)'
+                },
+                {
+                    'p': 'display',
+                    'v': 'flex'
+                },
+                {
+                    'p': 'width',
+                    'v': '100%'
+                },
+                {
+                    'p': 'height',
+                    'v': '100%'
+                },
+                {
+                    'p': 'justify-content',
+                    'v': 'center'
+                },
+                {
+                    'p': 'align-items',
+                    'v': 'center'
+                }
             ],
             [
-                'transition',
-                'background-color',
-                'height',
-                'width',
-                'border-radius',
-                'box-shadow',
-                'cursor'
+                {
+                    'p': 'transition',
+                    'v': 'all 0.3s ease'
+                },
+                {
+                    'p': 'background-color',
+                    'v': '#FFC145'
+                },
+                {
+                    'p': 'height',
+                    'v': '144px'
+                },
+                {
+                    'p': 'width',
+                    'v': '144px'
+                },
+                {
+                    'p': 'border-radius',
+                    'v': '72px'
+                },
+                {
+                    'p': 'box-shadow',
+                    'v': '0 4px 16px 0 rgba(0, 0, 0, 0.07)'
+                },
+                {
+                    'p': 'cursor',
+                    'v': 'pointer'
+                }
             ]
         ]);
     });
