@@ -1,9 +1,10 @@
+import data from '../caniuse-data'
 import props from './data/cssPropertyList';
 import vals from './data/cssValueList';
+import Parser from "./Parser";
 
 const Analyzer = {
-    data: '',
-
+    data,
     findProp: function findProp(prop) {
         const result = [];
 
@@ -55,6 +56,32 @@ const Analyzer = {
 
         return result.length === 0 ? false : result;
     },
+    getPropsAndValues: function getPropsAndValues(css) {
+        const parser = Object.create(Parser);
+        parser.setCSS(css);
+        const results = parser.parseCSS();
+
+        const occurrences = [];
+
+        results.forEach((sets) => {
+            sets.forEach((set) => {
+                const occurrence = {};
+                if (Analyzer.findProp(set.p)) {
+                    occurrence.p = Analyzer.findProp(set.p);
+                }
+                if (Analyzer.findVal(set.v)) {
+                    occurrence.v = Analyzer.findVal(set.v);
+                }
+
+                // if occurrence has either a property or a value i.e not empty
+                if (Object.getOwnPropertyNames(occurrence).length !== 0) {
+                    occurrences.push(occurrence)
+                }
+            })
+        });
+
+        return occurrences;
+    }
 };
 
 export default Analyzer;

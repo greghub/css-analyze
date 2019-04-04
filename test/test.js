@@ -166,4 +166,19 @@ describe('Analyze CSS', () => {
     it('can find value in the values list: gradient', () => {
         assert.deepEqual(['flex'], Analyzer.findVal('flex'));
     });
+    it('can get data', () => {
+        assert.deepEqual([ { p: [ 'background-image' ], v: [ 'deg' ] },
+            { p: [ 'display' ], v: [ 'flex' ] },
+            { p: [ 'width' ] },
+            { p: [ 'height' ] },
+            { p: [ 'justify-content' ], v: [ 'center' ] },
+            { p: [ 'align-items' ], v: [ 'center' ] },
+            { p: [ 'transition' ] },
+            { p: [ 'background-color' ] },
+            { p: [ 'height' ] },
+            { p: [ 'width' ] },
+            { p: [ 'border-radius' ] },
+            { p: [ 'box-shadow' ] },
+            { p: [ 'cursor' ], v: [ 'pointer' ] } ], Analyzer.getPropsAndValues(css_test));
+    });
 });
