@@ -8,8 +8,11 @@ const Analyzer = {
         const result = [];
 
         for (let p of props) {
+            if (p === prop) {
+                return [p]; // if an exact match return it
+            }
             if (p.includes(prop)) {
-                result.push(p);
+                result.push(p); // if not find partly matching
             }
         }
 
@@ -36,9 +39,17 @@ const Analyzer = {
 
         const result = [];
 
+        const regexp = /[a-z][a-z -]*/ig;
+        const valuesFiltered = val.match(regexp).filter((v, i, a) => a.indexOf(v) === i);
+
         for (let v of vals) {
-            if (val.includes(v)) {
-                result.push(v);
+            for (let f of valuesFiltered) {
+                if (f === v) {
+                    return [v]; // if an exact match return it
+                }
+                if (new RegExp(`^${f}`).test(v)) {
+                    result.push(v); // if not find partly matching
+                }
             }
         }
 

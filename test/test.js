@@ -115,6 +115,9 @@ describe('Analyze CSS', () => {
     it('can\'t find property in the properties list: --bg-color', () => {
         assert.equal(false, Analyzer.findProp('--bg-color'));
     });
+    it('can\'t find property in the properties list: width', () => {
+        assert.deepEqual(['width'], Analyzer.findProp('width'));
+    });
     it('can find value in the values list: scale', () => {
         assert.notEqual(false, Analyzer.findVal('scale(1.2)'));
     });
@@ -156,5 +159,11 @@ describe('Analyze CSS', () => {
     });
     it('can\'t find value in the values list: "content"', () => {
         assert.equal(true, Analyzer.skipStaticValues('"content"'));
+    });
+    it('can find value in the values list: gradient', () => {
+        assert.deepEqual(['deg'], Analyzer.findVal('linear-gradient(-128deg, rgba(255, 181, 32, 0.93) 3%, rgba(239, 39, 153, 0.93) 88%, rgba(237, 18, 171, 0.93) 100%);'));
+    });
+    it('can find value in the values list: gradient', () => {
+        assert.deepEqual(['flex'], Analyzer.findVal('flex'));
     });
 });
