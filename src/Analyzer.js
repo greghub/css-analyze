@@ -1,6 +1,7 @@
 import data from '../caniuse-data'
 import props from './data/cssPropertyList';
 import vals from './data/cssValueList';
+import cssColors from './data/cssColors';
 import Parser from "./Parser";
 
 const Analyzer = {
@@ -21,9 +22,8 @@ const Analyzer = {
     },
     skipStaticValues: function skipStaticValues(val) {
         const regexpColor = /^#[a-f0-9]{3}([a-f0-9]{3})?$/; // color
-        const cssColors = ["aliceblue", "antiquewhite", "aqua", "aquamarine", "azure", "beige", "bisque", "black", "blanchedalmond", "blue", "blueviolet", "brown", "burlywood", "cadetblue", "chartreuse", "chocolate", "coral", "cornflowerblue", "cornsilk", "crimson", "cyan", "darkblue", "darkcyan", "darkgoldenrod", "darkgray", "darkgrey", "darkgreen", "darkkhaki", "darkmagenta", "darkolivegreen", "darkorange", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue", "darkslategray", "darkslategrey", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dimgrey", "dodgerblue", "firebrick", "floralwhite", "forestgreen", "fuchsia", "gainsboro", "ghostwhite", "gold", "goldenrod", "gray", "grey", "green", "greenyellow", "honeydew", "hotpink", "indianred", "indigo", "ivory", "khaki", "lavender", "lavenderblush", "lawngreen", "lemonchiffon", "lightblue", "lightcoral", "lightcyan", "lightgoldenrodyellow", "lightgray", "lightgrey", "lightgreen", "lightpink", "lightsalmon", "lightseagreen", "lightskyblue", "lightslategray", "lightslategrey", "lightsteelblue", "lightyellow", "lime", "limegreen", "linen", "magenta", "maroon", "mediumaquamarine", "mediumblue", "mediumorchid", "mediumpurple", "mediumseagreen", "mediumslateblue", "mediumspringgreen", "mediumturquoise", "mediumvioletred", "midnightblue", "mintcream", "mistyrose", "moccasin", "navajowhite", "navy", "oldlace", "olive", "olivedrab", "orange", "orangered", "orchid", "palegoldenrod", "palegreen", "paleturquoise", "palevioletred", "papayawhip", "peachpuff", "peru", "pink", "plum", "powderblue", "purple", "rebeccapurple", "red", "rosybrown", "royalblue", "saddlebrown", "salmon", "sandybrown", "seagreen", "seashell", "sienna", "silver", "skyblue", "slateblue", "slategray", "slategrey", "snow", "springgreen", "steelblue", "tan", "teal", "thistle", "tomato", "turquoise", "violet", "wheat", "white", "whitesmoke", "yellow", "yellowgreen"];
-        const regexpRGBA = /^rgb(a?)([^)]+\))$/; // 4px 2px 3px 5px rgba(0, 0, 0, 0.5)
-        const regexpValueUnit = /^[0-9.]+(px|%)?(\s[0-9.]+(px|%)?)?(\s[0-9.]+(px|%)?)?(\s[0-9.]+(px|%)?)?(\srgb(a?)([^)]+\)))?$/; // 4px 2px 3px 5px rgba(0, 0, 0, 0.5) @TODO needs refactor
+        const regexpRGBA = /^(rgb(a)?\([0-9,. ]+\))$/; // rgba(0, 0, 0, 0.5)
+        const regexpValueUnit = /^([0-9. ]+(px|%)?){1,4}\s?(rgb(a)?\([0-9,. ]+\))?$/; // 4px 2px 3px 5px rgba(0, 0, 0, 0.5)
         const regexpURL = /^url\((['"])[^'"]+(['"])\)$/;
         const regexpString = /^(['"])[^'"]+(['"])$/;
         if (regexpColor.test(val)) return true;
