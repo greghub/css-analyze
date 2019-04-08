@@ -3,6 +3,8 @@ import props from './data/cssPropertyList';
 import vals from './data/cssValueList';
 import cssColors from './data/cssColors';
 import Parser from "./Parser";
+import propertyData from './data/propertyData';
+import valueData from './data/valueData';
 
 const Analyzer = {
     data,
@@ -81,6 +83,31 @@ const Analyzer = {
         });
 
         return occurrences;
+    },
+    getUsageData: function getUsageData(css) {
+        const data = this.getPropsAndValues(css);
+        const result = [];
+
+        data.forEach((item) => {
+            const d = {};
+
+            if (typeof item['p'] !== 'undefined') {
+                d[item['p']] = item['p'].map((p) => {
+                    const key = Object.keys(propertyData).find((key) => key === p);
+                    return propertyData[key];
+                });
+            }
+            if (typeof item['v'] !== 'undefined') {
+                d[item['v']] = item['v'].map((v) => {
+                    const key =  Object.keys(valueData).find((key) => key === v);
+                    return valueData[key];
+                });
+            }
+
+            result.push(d);
+        });
+
+        return result;
     }
 };
 

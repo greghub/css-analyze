@@ -181,4 +181,14 @@ describe('Analyze CSS', () => {
             { p: [ 'box-shadow' ] },
             { p: [ 'cursor' ], v: [ 'pointer' ] } ], Analyzer.getPropsAndValues(css_test));
     });
+    it('can get usage data', () => {
+        assert.deepEqual({
+            "background-image": [
+                "background-img-opts,object-fit"
+            ],
+            "deg": [
+                "css-image-orientation"
+            ]
+        }, Analyzer.getUsageData(css_test)[0]);
+    });
 });
