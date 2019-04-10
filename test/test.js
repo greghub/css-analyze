@@ -110,16 +110,16 @@ describe('Can get external CSS', () => {
 
 describe('Analyze CSS', () => {
     it('can find property in the properties list: background', () => {
-        assert.notEqual(false, Analyzer.findProp('background'));
+        assert.notDeepEqual([], Analyzer.findProp('background'));
     });
     it('can\'t find property in the properties list: --bg-color', () => {
-        assert.equal(false, Analyzer.findProp('--bg-color'));
+        assert.deepEqual([], Analyzer.findProp('--bg-color'));
     });
     it('can\'t find property in the properties list: width', () => {
         assert.deepEqual(['width'], Analyzer.findProp('width'));
     });
     it('can find value in the values list: scale', () => {
-        assert.notEqual(false, Analyzer.findVal('scale(1.2)'));
+        assert.notDeepEqual([], Analyzer.findVal('scale(1.2)'));
     });
     it('can\'t find value in the values list: #fa55cd', () => {
         assert.equal(true, Analyzer.skipStaticValues('#fa55cd'));

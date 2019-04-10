@@ -1,3 +1,3 @@
-import Parser from './src/Parser';
+import Analyzer from './src/Analyzer';
 
-export default Parser;
+export default Analyzer;
