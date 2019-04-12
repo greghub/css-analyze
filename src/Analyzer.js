@@ -48,7 +48,7 @@ const Analyzer = {
         for (let i = 0; i < vals.length; i++) {
             for (let j = 0; j < valuesFiltered.length; j++) {
                 if (valuesFiltered[j] === vals[i]) {
-                    return vals[i]; // if an exact match return it
+                    return [vals[i]]; // if an exact match return it
                 }
                 if (new RegExp(`^${valuesFiltered[j]}`).test(vals[i])) {
                     result.push(vals[i]); // if not find partly matching
